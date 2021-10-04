@@ -19,9 +19,7 @@ public class Main {
             showFirstPage();
             int selection = input.nextInt();
             switch (selection) {
-
                 case 1: {
-
                     System.out.println("Enter number of drivers:");
                     int numberOfdrivers = input.nextInt();
                     for (int i = 0; i < numberOfdrivers; i++) {
@@ -41,11 +39,8 @@ public class Main {
                         }
                     }
                     System.out.println("Your information was successfully registered.");
-
                 }
-
                 break;
-
                 case 2: {
                     System.out.println("Enter number of passenger:");
                     int numberOfPassengers = input.nextInt();
@@ -70,7 +65,6 @@ public class Main {
                         }
                     }
                     System.out.println("Your information was successfully registered.");
-
                 }
                 break;
                 case 3: {
@@ -85,7 +79,6 @@ public class Main {
                         int selection2 = input.nextInt();
                         switch (selection2) {
                             case 1: {
-
                                 System.out.println("Enter your information: (username, name, family, national code, ...) ");
                                 input.nextLine();
                                 String line = input.nextLine();
@@ -100,26 +93,16 @@ public class Main {
                                 } catch (SQLException e) {
                                     e.printStackTrace();
                                 }
-
                                 System.out.println("Your information was successfully registered.");
-
-
                             }
-
                             break;
-
                             case 2:
                                 break;
-
-
                             default:
                                 System.out.println("Invalid input!");
-
                         }
                     } else System.out.println(str);
                 }
-
-
                 break;
                 case 4: {
                     System.out.println("Enter username:");
@@ -133,7 +116,6 @@ public class Main {
                         int selection2 = input.nextInt();
                         switch (selection2) {
                             case 1: {
-
                                 System.out.println("Enter your information: (username, name, family, national code,accountBalance,driverUserName) ");
                                 input.nextLine();
                                 String line = input.nextLine();
@@ -153,26 +135,18 @@ public class Main {
                                 }
 
                                 System.out.println("Your information was successfully registered.");
-
-
                             }
-
                             break;
-
                             case 2:
                                 break;
-
-
                             default:
                                 System.out.println("Invalid input!");
-
                         }
                     } else {
                         menuIncreaseBalance();
                         int selection3 = input.nextInt();
                         switch (selection3) {
                             case 1: {
-
                                 System.out.println("Enter amount in RIAL:");
                                 input.nextLine();
                                 double increaseAccount = input.nextDouble();
@@ -183,27 +157,23 @@ public class Main {
 
                             case 2:
                                 break;
-
-
                             default:
                                 System.out.println("Invalid input!");
-
                         }
                     }
                 }
                 break;
                 case 5: {
-                    driverDataAccess.getAllDriver();
+                    System.out.println(driverDataAccess.getAllDriver());
                 }
                 break;
                 case 6: {
-                    passengerDataAccess.getAllPassenger();
+                    System.out.println(passengerDataAccess.getAllPassenger());
                 }
                 break;
                 default:
                     System.out.println("Invalid input!");
             }
-
         }
     }
 
@@ -220,5 +190,4 @@ public class Main {
         System.out.println("1.Increase account balance");
         System.out.println("2.Exit");
     }
-
 }
