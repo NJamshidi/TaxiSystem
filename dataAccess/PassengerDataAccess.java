@@ -1,7 +1,6 @@
 package taxiSystem.dataAccess;
 
-import taxiSystem.model.Driver;
-import taxiSystem.model.Passenger;
+import taxiSystem.model.person.Passenger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,13 +11,16 @@ public class PassengerDataAccess {
     public int addPassenger(Passenger passenger) throws SQLException {
         Connection connection = SqlConnection.getConnection();
         if (connection != null) {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into passengers values (?, ?, ?, ?,? ,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into passengers values (?, ?, ?, ?,? ,?,?,?,?)");
             preparedStatement.setString(1, passenger.getUserName());
             preparedStatement.setString(2, passenger.getName());
             preparedStatement.setString(3, passenger.getFamily());
             preparedStatement.setString(4, passenger.getNationalCode());
-            preparedStatement.setDouble(5, passenger.getAccountBalance());
-            preparedStatement.setString(6, passenger.getDriverUserName());
+            preparedStatement.setString(5, passenger.getPhoneNumber());
+            preparedStatement.setInt(6, passenger.getAge());
+            preparedStatement.setBoolean(7, passenger.getTripStatus());
+            preparedStatement.setDouble(8, passenger.getAccountBalance());
+            preparedStatement.setString(9, passenger.getDriverUserName());
 
 
             int i = preparedStatement.executeUpdate();
@@ -27,20 +29,24 @@ public class PassengerDataAccess {
             return 0;
         }
     }
+
     public String getPassengerByUserName(String userName) throws SQLException {
         Connection connection = SqlConnection.getConnection();
 
         if (connection != null) {
-            taxiSystem.model.Passenger passenger = new Passenger();
+            Passenger passenger = new Passenger();
             PreparedStatement statement = connection.prepareStatement("select * from passengers where userName = ?");
             statement.setString(1, userName);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-               passenger.setUserName(rs.getString("userName"));
+                passenger.setUserName(rs.getString("userName"));
                 passenger.setName(rs.getString("name"));
                 passenger.setFamily(rs.getString("family"));
                 passenger.setNationalCode(rs.getString("nationalCode"));
+                passenger.setPhoneNumber(rs.getString("phoneNumber"));
+                passenger.setAge(rs.getInt("age"));
+                passenger.setTripStatus(rs.getBoolean("tripStatus"));
                 passenger.setAccountBalance(rs.getDouble("accountBalance"));
                 passenger.setDriverUserName(rs.getString("driverUserName"));
             }
@@ -81,6 +87,9 @@ public class PassengerDataAccess {
                 passenger.setName(resultSet.getString("name"));
                 passenger.setFamily(resultSet.getString("family"));
                 passenger.setNationalCode(resultSet.getString("nationalCode"));
+                passenger.setPhoneNumber(resultSet.getString("phoneNumber"));
+                passenger.setAge(resultSet.getInt("age"));
+                passenger.setTripStatus(resultSet.getBoolean("tripStatus"));
                 passenger.setAccountBalance(resultSet.getDouble("accountBalance"));
                 passenger.setDriverUserName(resultSet.getString("driverUserName"));
 
