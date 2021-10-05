@@ -1,7 +1,8 @@
 package taxiSystem;
 
-import taxiSystem.model.Driver;
-import taxiSystem.model.Passenger;
+import taxiSystem.enumeration.TypeOfVehicle;
+import taxiSystem.model.person.Driver;
+import taxiSystem.model.person.Passenger;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -23,7 +24,7 @@ public class Main {
                     System.out.println("Enter number of drivers:");
                     int numberOfdrivers = input.nextInt();
                     for (int i = 0; i < numberOfdrivers; i++) {
-                        System.out.println("Enter drivers information: (username, name, family, national code, ...) ");
+                        System.out.println("Enter drivers information: (userName, name, family, nationalCode, phoneNumber ,age ,tripStatus,vehicleId, TypeOfVehicle) ");
                         input.nextLine();
                         String line = input.nextLine();
                         String[] lineArray = line.split(",");
@@ -31,7 +32,15 @@ public class Main {
                         String name = lineArray[1];
                         String family = lineArray[2];
                         String nationalCode = lineArray[3];
-                        Driver driver = new Driver(userName, name, family, nationalCode);
+                        String phoneNumber = lineArray[4];
+                        String strAge = lineArray[5];
+                        int age = Integer.parseInt(strAge);
+                        String strTrip = lineArray[6];
+                        Boolean tripStatus = Boolean.parseBoolean(strTrip);
+                        String strId = lineArray[7];
+                        int vehicleId = Integer.parseInt(strId);
+
+                        Driver driver = new Driver(userName, name, family, nationalCode, phoneNumber, age, tripStatus, vehicleId, TypeOfVehicle.CAR);
                         try {
                             driverDataAccess.addDriver(driver);
                         } catch (SQLException e) {
@@ -45,7 +54,7 @@ public class Main {
                     System.out.println("Enter number of passenger:");
                     int numberOfPassengers = input.nextInt();
                     for (int i = 0; i < numberOfPassengers; i++) {
-                        System.out.println("Enter passengers information: (username, name, family, national code, accountBalance, driverUserName ...) ");
+                        System.out.println("Enter passengers information: (userName, name, family, nationalCode, phoneNumber,age,tripStatus,accountBalance, driverUserName) ");
                         input.nextLine();
                         String line = input.nextLine();
                         String[] lineArray = line.split(",");
@@ -53,11 +62,15 @@ public class Main {
                         String name = lineArray[1];
                         String family = lineArray[2];
                         String nationalCode = lineArray[3];
-                        String str = lineArray[4];
+                        String phoneNumber = lineArray[4];
+                        String strAge = lineArray[5];
+                        int age = Integer.parseInt(strAge);
+                        String strTrip = lineArray[6];
+                        boolean tripStatus = Boolean.parseBoolean(strTrip);
+                        String str = lineArray[7];
                         double accountBalance = Double.parseDouble(str);
-                        String driverUserName = lineArray[5];
-
-                        Passenger passenger = new Passenger(userName, name, family, nationalCode, accountBalance, driverUserName);
+                        String driverUserName = lineArray[8];
+                        Passenger passenger = new Passenger(userName, name, family, nationalCode, phoneNumber, age, tripStatus, accountBalance, driverUserName);
                         try {
                             passengerDataAccess.addPassenger(passenger);
                         } catch (SQLException e) {
@@ -79,7 +92,7 @@ public class Main {
                         int selection2 = input.nextInt();
                         switch (selection2) {
                             case 1: {
-                                System.out.println("Enter your information: (username, name, family, national code, ...) ");
+                                System.out.println("Enter your information: (userName, name, family, nationalCode, phoneNumber ,age ,tripStatus,vehicleId, TypeOfVehicle) ");
                                 input.nextLine();
                                 String line = input.nextLine();
                                 String[] lineArray = line.split(",");
@@ -87,9 +100,17 @@ public class Main {
                                 String name = lineArray[1];
                                 String family = lineArray[2];
                                 String nationalCode = lineArray[3];
-                                Driver driv = new Driver(userName, name, family, nationalCode);
+                                String phoneNumber = lineArray[4];
+                                String strAge = lineArray[5];
+                                int age = Integer.parseInt(strAge);
+                                String strtrip = lineArray[6];
+                                Boolean tripStatus = Boolean.parseBoolean(strtrip);
+                                String str1 = lineArray[7];
+                                int vehicleId = Integer.parseInt(str1);
+
+                                Driver driver = new Driver(userName, name, family, nationalCode, phoneNumber, age, tripStatus, vehicleId, TypeOfVehicle.CAR);
                                 try {
-                                    driverDataAccess.addDriver(driv);
+                                    driverDataAccess.addDriver(driver);
                                 } catch (SQLException e) {
                                     e.printStackTrace();
                                 }
@@ -116,7 +137,7 @@ public class Main {
                         int selection2 = input.nextInt();
                         switch (selection2) {
                             case 1: {
-                                System.out.println("Enter your information: (username, name, family, national code,accountBalance,driverUserName) ");
+                                System.out.println("Enter your information: (userName, name, family, nationalCode, phoneNumber,age,tripStatus,accountBalance, driverUserName) ");
                                 input.nextLine();
                                 String line = input.nextLine();
                                 String[] lineArray = line.split(",");
@@ -124,10 +145,15 @@ public class Main {
                                 String name = lineArray[1];
                                 String family = lineArray[2];
                                 String nationalCode = lineArray[3];
-                                String accountBalanceStr = lineArray[4];
-                                double accountBalance = Double.parseDouble(accountBalanceStr);
-                                String driverUserName = lineArray[5];
-                                Passenger passenger = new Passenger(userName, name, family, nationalCode, accountBalance, driverUserName);
+                                String phoneNumber = lineArray[4];
+                                String strAge = lineArray[5];
+                                int age = Integer.parseInt(strAge);
+                                String strTrip = lineArray[6];
+                                boolean tripStatus = Boolean.parseBoolean(strTrip);
+                                String strBalance = lineArray[7];
+                                double accountBalance = Double.parseDouble(strBalance);
+                                String driverUserName = lineArray[8];
+                                Passenger passenger = new Passenger(userName, name, family, nationalCode, phoneNumber, age, tripStatus, accountBalance, driverUserName);
                                 try {
                                     passengerDataAccess.addPassenger(passenger);
                                 } catch (SQLException e) {
